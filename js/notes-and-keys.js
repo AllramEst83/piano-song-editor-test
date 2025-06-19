@@ -1,40 +1,139 @@
 export let currentSongSequence = [
-  { note: "C4", type: "quarter", pauseBefore: 0, pauseAfter: 0.1 },
-  { note: "D4", type: "quarter", pauseBefore: 0, pauseAfter: 0.1 },
-  { note: "E4", type: "quarter", pauseBefore: 0, pauseAfter: 0.1 },
-  { note: "F4", type: "quarter", pauseBefore: 0, pauseAfter: 0.1 },
-  { note: "G4", type: "quarter", pauseBefore: 0, pauseAfter: 0.1 },
-  { note: "G4", type: "quarter", pauseBefore: 0, pauseAfter: 0.1 },
-  { note: "A4", type: "quarter", pauseBefore: 0, pauseAfter: 0.1 },
-  { note: "G4", type: "half", pauseBefore: 0, pauseAfter: 0.2 },
-  { note: "C5", type: "quarter", pauseBefore: 0, pauseAfter: 0.1 },
-  { note: "D5", type: "quarter", pauseBefore: 0, pauseAfter: 0.1 },
-  { note: "E5", type: "quarter", pauseBefore: 0, pauseAfter: 0.1 },
-  { note: "F5", type: "quarter", pauseBefore: 0, pauseAfter: 0.1 },
-  { note: "C4", type: "quarter", pauseBefore: 0, pauseAfter: 0.1 },
-  { note: "D4", type: "quarter", pauseBefore: 0, pauseAfter: 0.1 },
-  { note: "E4", type: "quarter", pauseBefore: 0, pauseAfter: 0.1 },
-  { note: "F4", type: "quarter", pauseBefore: 0, pauseAfter: 0.1 },
-  { note: "G4", type: "quarter", pauseBefore: 0, pauseAfter: 0.1 },
-  { note: "G4", type: "quarter", pauseBefore: 0, pauseAfter: 0.1 },
-  { note: "A4", type: "quarter", pauseBefore: 0, pauseAfter: 0.1 },
-  { note: "G4", type: "half", pauseBefore: 0, pauseAfter: 0.2 },
-  { note: "C5", type: "quarter", pauseBefore: 0, pauseAfter: 0.1 },
-  { note: "D5", type: "quarter", pauseBefore: 0, pauseAfter: 0.1 },
-  { note: "E5", type: "quarter", pauseBefore: 0, pauseAfter: 0.1 },
-  { note: "F5", type: "quarter", pauseBefore: 0, pauseAfter: 0.1 },
-  { note: "C4", type: "quarter", pauseBefore: 0, pauseAfter: 0.1 },
-  { note: "D4", type: "quarter", pauseBefore: 0, pauseAfter: 0.1 },
-  { note: "E4", type: "quarter", pauseBefore: 0, pauseAfter: 0.1 },
-  { note: "F4", type: "quarter", pauseBefore: 0, pauseAfter: 0.1 },
-  { note: "G4", type: "quarter", pauseBefore: 0, pauseAfter: 0.1 },
-  { note: "G4", type: "quarter", pauseBefore: 0, pauseAfter: 0.1 },
-  { note: "A4", type: "quarter", pauseBefore: 0, pauseAfter: 0.1 },
-  { note: "G4", type: "half", pauseBefore: 0, pauseAfter: 0.2 },
-  { note: "C5", type: "quarter", pauseBefore: 0, pauseAfter: 0.1 },
-  { note: "D5", type: "quarter", pauseBefore: 0, pauseAfter: 0.1 },
-  { note: "E5", type: "quarter", pauseBefore: 0, pauseAfter: 0.1 },
-  { note: "F5", type: "quarter", pauseBefore: 0, pauseAfter: 0.1 },
+  // Part 1
+  {
+    time: 0,
+    right: { note: "E4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 }, // pauseAfter halved
+    left: { note: "C3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+  },
+  {
+    time: 0.5, // time halved (was 1)
+    right: { note: "E4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+    left: { note: "C3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+  },
+  {
+    time: 1, // time halved (was 2)
+    right: { note: "F4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+    left: { note: "C3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+  },
+  {
+    time: 1.5, // time halved (was 3)
+    right: { note: "G4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+    left: { note: "G3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+  },
+  {
+    time: 2, // time halved (was 4)
+    right: { note: "G4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+    left: { note: "G3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+  },
+  {
+    time: 2.5, // time halved (was 5)
+    right: { note: "F4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+    left: { note: "C3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+  },
+  {
+    time: 3, // time halved (was 6)
+    right: { note: "E4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+    left: { note: "C3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+  },
+  {
+    time: 3.5, // time halved (was 7)
+    right: { note: "D4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+    left: { note: "G3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+  },
+
+  {
+    time: 4, // time halved (was 8)
+    right: { note: "C4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+    left: { note: "C3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+  },
+  {
+    time: 4.5, // time halved (was 9)
+    right: { note: "C4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+    left: { note: "C3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+  },
+  {
+    time: 5, // time halved (was 10)
+    right: { note: "D4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+    left: { note: "C3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+  },
+  {
+    time: 5.5, // time halved (was 11)
+    right: { note: "E4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+    left: { note: "G3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+  },
+  {
+    time: 6, // time halved (was 12)
+    right: { note: "E4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+    left: { note: "C3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+  },
+  {
+    time: 6.5, // time halved (was 13)
+    right: { note: "D4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+    left: { note: "G3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+  },
+  {
+    time: 7, // time halved (was 14)
+    right: { note: "D4", type: "half", pauseBefore: 0, pauseAfter: 0.15 }, // pauseAfter halved
+    left: { note: "C3", type: "half", pauseBefore: 0, pauseAfter: 0.15 },
+  },
+
+  // Part 2
+  {
+    time: 8, // time halved (was 16)
+    right: { note: "E4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+    left: { note: "C3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+  },
+  {
+    time: 8.5, // time halved (was 17)
+    right: { note: "E4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+    left: { note: "C3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+  },
+  {
+    time: 9, // time halved (was 18)
+    right: { note: "F4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+    left: { note: "C3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+  },
+  {
+    time: 9.5, // time halved (was 19)
+    right: { note: "E4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+    left: { note: "G3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+  },
+  {
+    time: 10, // time halved (was 20)
+    right: { note: "D4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+    left: { note: "C3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+  },
+  {
+    time: 10.5, // time halved (was 21)
+    right: { note: "C4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+    left: { note: "C3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+  },
+  {
+    time: 11, // time halved (was 22)
+    right: { note: "D4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+    left: { note: "C3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+  },
+  {
+    time: 11.5, // time halved (was 23)
+    right: { note: "E4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+    left: { note: "G3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+  },
+
+  {
+    time: 12, // time halved (was 24)
+    right: { note: "D4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+    left: { note: "C3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+  },
+  {
+    time: 12.5, // time halved (was 25)
+    right: { note: "C4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+    left: { note: "G3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+  },
+  {
+    time: 13, // time halved (was 26)
+    right: { note: "C4", type: "half", pauseBefore: 0, pauseAfter: 0.25 }, // pauseAfter halved
+    left: { note: "C3", type: "half", pauseBefore: 0, pauseAfter: 0.25 },
+  },
 ];
 export const noteDurations = {
   whole: "1n",
