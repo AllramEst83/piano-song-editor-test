@@ -3,167 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Simply Piano</title>
+    <title>Simply Piano Editor</title>
     <meta name="description" content="A simply piano app using Tone.js" />
+    <link rel="stylesheet" href="./css/style.css" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-      /* Custom styles for the song editor, complementing site.css */
-      body {
-        display: flex;
-        flex-direction: column; /* Arrange content vertically */
-        justify-content: flex-start; /* Start content from the top */
-        align-items: center;
-        min-height: 100vh;
-        background-color: #1a202c; /* Dark background */
-        padding-top: 2rem; /* Add some padding at the top */
-      }
-
-      .song-editor-container {
-        width: 95vw;
-        max-width: 1400px;
-        background-color: #333;
-        border-radius: 1rem;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-        padding: 1.5rem;
-        margin-bottom: 2rem; /* Space between editor and piano */
-        box-sizing: border-box;
-      }
-
-      .note-editor-rack {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(5px) saturate(180%);
-        -webkit-backdrop-filter: blur(5px) saturate(180%);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 0.75rem;
-        padding: 1rem;
-        margin-bottom: 1rem;
-      }
-
-      .song-notes-scroll-wrapper {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(5px) saturate(180%);
-        -webkit-backdrop-filter: blur(5px) saturate(180%);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 0.75rem;
-        padding: 1rem;
-        margin-bottom: 1rem;
-        display: flex; /* Use flex to align title and scrollable area */
-        flex-direction: column; /* Stack title above scrollable area */
-      }
-
-      .song-notes-rack {
-        height: 80px; /* Fixed height for horizontal scrolling */
-        overflow-x: auto; /* Enable horizontal scrolling */
-        overflow-y: hidden; /* Hide vertical scrollbar */
-        white-space: nowrap; /* Prevent note items from wrapping */
-        display: flex; /* Use flexbox for horizontal layout */
-        align-items: center; /* Center items vertically in the rack */
-        padding-bottom: 1rem; /* Add padding for scrollbar */
-        padding-top: 0.5rem; /* Add padding to the top of the notes */
-      }
-
-      /* Scrollbar styling for song notes rack */
-      .song-notes-rack::-webkit-scrollbar {
-        height: 8px; /* Height for horizontal scrollbar */
-      }
-
-      .song-notes-rack::-webkit-scrollbar-track {
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 10px;
-      }
-
-      .song-notes-rack::-webkit-scrollbar-thumb {
-        background-color: rgba(255, 255, 255, 0.2);
-        border-radius: 10px;
-        border: 2px solid rgba(255, 255, 255, 0.05);
-      }
-
-      .song-notes-rack::-webkit-scrollbar-thumb:hover {
-        background-color: rgba(255, 255, 255, 0.3);
-      }
-
-      .note-input {
-        background-color: rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        color: white;
-        padding: 0.5rem 0.75rem;
-        border-radius: 0.5rem;
-        font-size: 1rem;
-      }
-      .note-input:focus {
-        outline: none;
-        border-color: #93c5fd; /* Light blue on focus */
-        box-shadow: 0 0 0 2px rgba(147, 197, 253, 0.5);
-      }
-
-      .action-button {
-        background-color: #6d28d9; /* Violet-700 */
-        color: white;
-        padding: 0.75rem 1.5rem;
-        border-radius: 0.75rem;
-        font-weight: 600;
-        transition: background-color 0.2s ease-in-out,
-          transform 0.1s ease-in-out;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-      }
-      .action-button:hover {
-        background-color: #7c3aed; /* Violet-600 */
-        transform: translateY(-1px);
-      }
-      .action-button:active {
-        transform: translateY(0);
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-      }
-
-      .note-item {
-        background: rgba(255, 255, 255, 0.08);
-        border-radius: 0.5rem;
-        padding: 0.5rem;
-        margin-right: 0.5rem;
-        margin-top: 0.5rem;
-        min-width: 120px;
-        min-height: 60px; /* Ensure vertical space */
-        flex-shrink: 0;
-        cursor: pointer;
-        transition: background-color 0.1s ease-in-out;
-        display: flex;
-        flex-direction: column; /* Stack content vertically */
-        justify-content: center; /* Center vertically */
-        align-items: center; /* Center horizontally */
-        text-align: center;
-      }
-
-      .note-item:hover {
-        background: rgba(255, 255, 255, 0.15);
-      }
-      .note-item.selected {
-        background-color: #4c1d95; /* Deep violet for selected */
-        border: 1px solid #a78bfa; /* Light violet border */
-      }
-      .note-input {
-        background-color: rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        color: white;
-        padding: 0.5rem 0.75rem;
-        border-radius: 0.5rem;
-        font-size: 1rem;
-        appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-      }
-
-      .note-input option {
-        background-color: #2d3748;
-        color: white;
-      }
-    </style>
   </head>
   <body>
     <div
       class="fixed top-8 left-1/2 -translate-x-1/2 z-30 select-none text-gray-200 text-xl md:text-2xl font-semibold tracking-wide pointer-events-none"
       style="text-shadow: 0 2px 8px #222a; margin-top: 0.5rem"
     >
-      Simply piano
+      Simply Piano Editor
     </div>
     <div class="fixed top-6 right-10 z-30 select-none">
       <button
@@ -225,8 +75,6 @@
     </div>
 
     <div class="song-editor-container text-white mt-20">
-      <h2 class="text-2xl font-bold mb-4 text-center">Auto-Play Song Editor</h2>
-
       <div class="note-editor-rack flex flex-col gap-4 mb-6">
         <!-- Input Row -->
 
@@ -275,30 +123,20 @@
             <label
               for="pause-before-input"
               class="text-sm font-medium mb-1 text-gray-300"
-              >Pause Before (seconds)</label
             >
-            <input
-              type="number"
-              step="0.01"
-              id="pause-before-input"
-              class="note-input"
-              value="0"
-            />
+              Pause Before
+            </label>
+            <select id="pause-before-input" class="note-input"></select>
           </div>
 
           <div class="flex flex-col flex-1 min-w-[120px]">
             <label
               for="pause-after-input"
               class="text-sm font-medium mb-1 text-gray-300"
-              >Pause After (seconds)</label
             >
-            <input
-              type="number"
-              step="0.01"
-              id="pause-after-input"
-              class="note-input"
-              value="0"
-            />
+              Pause After
+            </label>
+            <select id="pause-after-input" class="note-input"></select>
           </div>
         </div>
 
@@ -326,7 +164,7 @@
         </div>
       </div>
 
-      <div class="song-notes-scroll-wrapper">
+      <div class="song-notes-scroll-wrapper h-[65vh] overflow-hidden">
         <div class="flex justify-between items-center mb-3">
           <h3 class="text-lg font-semibold text-gray-200">
             Current Song Notes
@@ -347,22 +185,108 @@
           </div>
         </div>
 
-        <div id="song-notes-rack-right-hand" class="song-notes-rack">
-          <div id="song-notes-list-right-hand" class="flex">
-            <!-- RIGHT HAND NOTES WILL BE GENEARTED HERE -->
+        <!-- Scrollable horizontal song area -->
+        <div
+          class="flex gap-8 border border-gray-700 rounded-md p-4 max-h-[60vh] overflow-x-auto"
+        >
+          <!-- Left Hand -->
+          <div class="flex flex-col flex-1 min-w-[300px]">
+            <h4 class="text-gray-400 mb-1 text-sm text-center">Left Hand</h4>
+
+            <div
+              id="song-notes-list-left-hand"
+              class="flex gap-2 flex-1 overflow-y-auto"
+            >
+              <div class="flex flex-col gap-1 flex-1 min-w-0">
+                <div class="text-center text-xs text-gray-500">Pinky</div>
+                <div
+                  id="left-finger-5"
+                  class="flex flex-col gap-2 flex-1 min-w-0"
+                ></div>
+              </div>
+              <div class="flex flex-col gap-1 flex-1 min-w-0">
+                <div class="text-center text-xs text-gray-500">Ring</div>
+                <div
+                  id="left-finger-4"
+                  class="flex flex-col gap-2 flex-1 min-w-0"
+                ></div>
+              </div>
+              <div class="flex flex-col gap-1 flex-1 min-w-0">
+                <div class="text-center text-xs text-gray-500">Middle</div>
+                <div
+                  id="left-finger-3"
+                  class="flex flex-col gap-2 flex-1 min-w-0"
+                ></div>
+              </div>
+              <div class="flex flex-col gap-1 flex-1 min-w-0">
+                <div class="text-center text-xs text-gray-500">Index</div>
+                <div
+                  id="left-finger-2"
+                  class="flex flex-col gap-2 flex-1 min-w-0"
+                ></div>
+              </div>
+              <div class="flex flex-col gap-1 flex-1 min-w-0">
+                <div class="text-center text-xs text-gray-500">Thumb</div>
+                <div
+                  id="left-finger-1"
+                  class="flex flex-col gap-2 flex-1 min-w-0"
+                ></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Hand -->
+          <div class="flex flex-col flex-1 min-w-[300px]">
+            <h4 class="text-gray-400 mb-1 text-sm text-center">Right Hand</h4>
+            <div
+              id="song-notes-list-right-hand"
+              class="flex gap-2 flex-1 overflow-y-auto"
+            >
+              <div class="flex flex-col gap-1 flex-1 min-w-0">
+                <div class="text-center text-xs text-gray-500">Thumb</div>
+                <div
+                  id="right-finger-1"
+                  class="flex flex-col gap-2 flex-1 min-w-0"
+                ></div>
+              </div>
+              <div class="flex flex-col gap-1 flex-1 min-w-0">
+                <div class="text-center text-xs text-gray-500">Index</div>
+                <div
+                  id="right-finger-2"
+                  class="flex flex-col gap-2 flex-1 min-w-0"
+                ></div>
+              </div>
+              <div class="flex flex-col gap-1 flex-1 min-w-0">
+                <div class="text-center text-xs text-gray-500">Middle</div>
+                <div
+                  id="right-finger-3"
+                  class="flex flex-col gap-2 flex-1 min-w-0"
+                ></div>
+              </div>
+              <div class="flex flex-col gap-1 flex-1 min-w-0">
+                <div class="text-center text-xs text-gray-500">Ring</div>
+                <div
+                  id="right-finger-4"
+                  class="flex flex-col gap-2 flex-1 min-w-0"
+                ></div>
+              </div>
+              <div class="flex flex-col gap-1 flex-1 min-w-0">
+                <div class="text-center text-xs text-gray-500">Pinky</div>
+                <div
+                  id="right-finger-5"
+                  class="flex flex-col gap-2 flex-1 min-w-0"
+                ></div>
+              </div>
+            </div>
           </div>
         </div>
-        <div id="song-notes-rack-left-hand" class="song-notes-rack">
-          <div id="song-notes-list-left-hand" class="flex">
-            <!-- LEFT HAND NOTES WILL BE GENEARTED HERE -->
-          </div>
-        </div>
+
         <div class="flex justify-center mt-4">
           <button
             id="save-song-btn"
             class="action-button bg-green-700 hover:bg-green-600"
           >
-            Save Song
+            Export song
           </button>
           <button
             id="clear-all-notes-btn"
@@ -381,361 +305,11 @@
     </div>
     <script src="https://unpkg.com/tone"></script>
     <script type="module">
-      import {
-        currentSongSequence,
-        pianoKeys,
-        noteDurations,
-      } from "./js/notes-and-keys.js";
-      import { initAudio } from "./js/audio.js";
-
-      let selectedNoteIndex = -1;
-      let selectedHand = null;
-      const { synth } = await initAudio();
-      let isPlaying = false;
-
-      const noteInput = document.getElementById("note-input");
-      const noteTypeInput = document.getElementById("note-type-input");
-      const pauseBeforeInput = document.getElementById("pause-before-input");
-      const pauseAfterInput = document.getElementById("pause-after-input");
-      const timeInput = document.getElementById("note-time-input");
-      const restToggle = document.getElementById("rest-toggle");
-
-      const addNoteBtn = document.getElementById("add-note-btn");
-      const updateNoteBtn = document.getElementById("update-note-btn");
-      const deleteNoteBtn = document.getElementById("delete-note-btn");
-      const clearEditorBtn = document.getElementById("clear-editor-btn");
-      const playBtn = document.getElementById("play-song-btn");
-      const rightHandSongNotesList = document.getElementById(
-        "song-notes-list-right-hand"
-      );
-      const leftHandSongNotesList = document.getElementById(
-        "song-notes-list-left-hand"
-      );
-      const saveSongBtn = document.getElementById("save-song-btn");
-      const clearAllNotesBtn = document.getElementById("clear-all-notes-btn");
-      const bpmSlider = document.getElementById("bpm-input");
-      const bpmDisplay = document.getElementById("bpm-display");
-
-      const noteNameFromValue = Object.fromEntries(
-        Object.entries(noteDurations).map(([name, value]) => [value, name])
-      );
-
-      function renderNoteSelects() {
-        noteInput.innerHTML = "";
-        pianoKeys.forEach((key) => {
-          const opt = document.createElement("option");
-          opt.value = key;
-          opt.textContent = key;
-          noteInput.appendChild(opt);
-        });
-
-        noteTypeInput.innerHTML = "";
-        Object.entries(noteDurations).forEach(([name, value]) => {
-          const opt = document.createElement("option");
-          opt.value = value;
-          opt.textContent = name;
-          noteTypeInput.appendChild(opt);
-        });
-      }
-
-      function renderSongNotes() {
-        rightHandSongNotesList.innerHTML = "";
-        leftHandSongNotesList.innerHTML = "";
-
-        currentSongSequence.forEach((noteObj, index) => {
-          // Right hand
-          const right = document.createElement("div");
-          right.className = "note-item text-sm text-gray-200";
-          const rightNote = noteObj.right;
-          right.innerHTML = rightNote
-            ? `<div class="text-center leading-tight">
-                <div>${rightNote.note}</div>
-                <div class="text-xs text-gray-400">${rightNote.type}</div>
-              </div>`
-            : `<div class="text-center text-gray-400">(rest)</div>`;
-
-          if (selectedNoteIndex === index && selectedHand === "right")
-            right.classList.add("selected");
-          right.addEventListener("click", () => {
-            selectedNoteIndex = index;
-            selectedHand = "right";
-            populateEditor(noteObj.time, noteObj.right);
-            renderSongNotes();
-          });
-          rightHandSongNotesList.appendChild(right);
-
-          // Left hand
-          const left = document.createElement("div");
-          left.className = "note-item text-sm text-gray-200";
-          const leftNote = noteObj.left;
-          left.innerHTML = leftNote
-            ? `<div class="text-center leading-tight">
-                <div>${leftNote.note}</div>
-                <div class="text-xs text-gray-400">${leftNote.type}</div>
-              </div>`
-            : `<div class="text-center text-gray-400">(rest)</div>`;
-
-          if (selectedNoteIndex === index && selectedHand === "left")
-            left.classList.add("selected");
-          left.addEventListener("click", () => {
-            selectedNoteIndex = index;
-            selectedHand = "left";
-            populateEditor(noteObj.time, noteObj.left);
-            renderSongNotes();
-          });
-          leftHandSongNotesList.appendChild(left);
-        });
-      }
-
-      function populateEditor(_, noteObj = null) {
-        const block = currentSongSequence[selectedNoteIndex];
-        if (!block) return;
-
-        timeInput.value = block.time;
-
-        const isRest = !noteObj;
-        restToggle.checked = isRest;
-
-        noteInput.disabled = isRest;
-        noteTypeInput.disabled = isRest;
-        pauseBeforeInput.disabled = isRest;
-        pauseAfterInput.disabled = isRest;
-
-        if (!isRest) {
-          noteInput.value = noteObj.note || noteInput.options[0]?.value;
-          noteTypeInput.value =
-            noteDurations[noteObj.type] ||
-            noteObj.type ||
-            noteTypeInput.options[0]?.value;
-          pauseBeforeInput.value = noteObj.pauseBefore ?? 0;
-          pauseAfterInput.value = noteObj.pauseAfter ?? 0;
-        } else {
-          noteInput.selectedIndex = 0;
-          noteTypeInput.selectedIndex = 0;
-          pauseBeforeInput.value = 0;
-          pauseAfterInput.value = 0;
-        }
-      }
-
-      function clearEditor() {
-        timeInput.value = currentSongSequence.length;
-        restToggle.checked = false;
-        noteInput.selectedIndex = 0;
-        noteTypeInput.selectedIndex = 0;
-        pauseBeforeInput.value = "0";
-        pauseAfterInput.value = "0";
-        selectedNoteIndex = -1;
-        selectedHand = null;
-        renderSongNotes();
-      }
-
-      function startPlayback() {
-        if (currentSongSequence.length === 0) {
-          alert("No notes to play. Please add some notes first.");
-          return;
-        }
-
-        // 1. Set BPM BEFORE using Tone.Time or scheduling
-        const bpm = parseInt(bpmSlider.value, 10) || 120;
-        Tone.Transport.bpm.value = bpm;
-
-        // 2. Clear any previously scheduled events
-        Tone.Transport.cancel();
-
-        const secondsPerBeat = 60 / bpm;
-
-        currentSongSequence.forEach(({ time, left, right }) => {
-          const baseTime = time * secondsPerBeat;
-
-          const schedule = (noteObj) => {
-            if (!noteObj) return;
-
-            const duration = noteDurations[noteObj.type] || "4n";
-            const noteLength = Tone.Time(duration).toSeconds();
-            const noteTime = baseTime + (noteObj.pauseBefore || 0);
-
-            Tone.Transport.scheduleOnce((t) => {
-              synth.triggerAttackRelease(noteObj.note, duration, t);
-            }, noteTime);
-          };
-
-          schedule(left);
-          schedule(right);
-        });
-
-        // 3. Determine when to stop playback
-        const last = currentSongSequence.at(-1);
-        const lastEndTime =
-          (last?.time || 0) * secondsPerBeat +
-          Math.max(
-            last?.left?.pauseAfter || 0,
-            last?.right?.pauseAfter || 0,
-            Tone.Time(last?.left?.type || last?.right?.type || "4n").toSeconds()
-          );
-
-        Tone.Transport.scheduleOnce(() => {
-          stopPlayback();
-        }, lastEndTime + 0.5);
-
-        // 4. Start transport with slight delay
-        Tone.Transport.start("+0.1");
-        isPlaying = true;
-        playBtn.textContent = "⏹️ Stop";
-      }
-
-      function stopPlayback() {
-        Tone.Transport.stop();
-        Tone.Transport.cancel();
-        isPlaying = false;
-        playBtn.textContent = "▶️ Play Song";
-      }
+      import { renderNoteSelects, clearEditor } from "./js/editor.js";
+      import { setupUI } from "./js/ui.js";
 
       // EVENT HANDLERS
-
-      bpmSlider.addEventListener("input", () => {
-        const bpm = parseInt(bpmSlider.value, 10);
-        bpmDisplay.textContent = bpm;
-        Tone.Transport.bpm.rampTo(bpm, 0.5);
-      });
-
-      playBtn.addEventListener("click", async () => {
-        if (!isPlaying) {
-          await Tone.start();
-          startPlayback();
-        } else {
-          stopPlayback();
-        }
-      });
-
-      restToggle.addEventListener("change", () => {
-        const isRest = restToggle.checked;
-
-        noteInput.disabled = isRest;
-        noteTypeInput.disabled = isRest;
-        pauseBeforeInput.disabled = isRest;
-        pauseAfterInput.disabled = isRest;
-
-        if (isRest) {
-          // Clear values when rest is selected
-          noteInput.selectedIndex = 0;
-          noteTypeInput.selectedIndex = 0;
-          pauseBeforeInput.value = 0;
-          pauseAfterInput.value = 0;
-        }
-      });
-      // Add Note
-      addNoteBtn.addEventListener("click", () => {
-        const time = parseInt(timeInput.value);
-
-        if (currentSongSequence.some((n) => n.time === time)) {
-          alert("Time already exists. Select a different time or update.");
-          return;
-        }
-
-        currentSongSequence.push({
-          time,
-          left: null,
-          right: null,
-        });
-
-        clearEditor();
-      });
-
-      // Update Note
-      deleteNoteBtn.addEventListener("click", () => {
-        if (selectedNoteIndex === -1 || !selectedHand) return;
-
-        const noteBlock = currentSongSequence[selectedNoteIndex];
-        noteBlock[selectedHand] = null;
-
-        if (!noteBlock.left && !noteBlock.right) {
-          currentSongSequence.splice(selectedNoteIndex, 1);
-          selectedNoteIndex = -1;
-        }
-
-        clearEditor();
-        currentSongSequence.sort((a, b) => a.time - b.time);
-      });
-
-      updateNoteBtn.addEventListener("click", () => {
-        if (selectedNoteIndex === -1 || !selectedHand) return;
-
-        const newTime = parseFloat(timeInput.value);
-        const noteObj = restToggle.checked
-          ? null
-          : {
-              note: noteInput.value,
-              type:
-                noteNameFromValue[noteTypeInput.value] || noteTypeInput.value,
-              pauseBefore: parseFloat(pauseBeforeInput.value),
-              pauseAfter: parseFloat(pauseAfterInput.value),
-            };
-
-        const current = currentSongSequence[selectedNoteIndex];
-
-        // If time hasn't changed, just update the note
-        if (newTime === current.time) {
-          current[selectedHand] = noteObj;
-        } else {
-          // Check if there's already a block at newTime
-          const conflict = currentSongSequence.find(
-            (n, i) => n.time === newTime && i !== selectedNoteIndex
-          );
-          if (conflict) {
-            alert("A note block at that time already exists.");
-            return;
-          }
-
-          // Move the note to new time
-          const moved = { ...current };
-          moved.time = newTime;
-          moved[selectedHand] = noteObj;
-
-          // Remove old block
-          currentSongSequence.splice(selectedNoteIndex, 1);
-          // Insert new block
-          currentSongSequence.push(moved);
-        }
-
-        clearEditor();
-      });
-
-      clearEditorBtn.addEventListener("click", () => {
-        clearEditor();
-      });
-
-      // Save Song (mock)
-      saveSongBtn.addEventListener("click", () => {
-        const bpm =
-          parseInt(document.getElementById("bpm-input").value, 10) || 120;
-        const name = prompt("Enter a name for the song:", "Untitled Song");
-        if (!name) return;
-
-        const song = {
-          name,
-          bpm,
-          sequence: currentSongSequence
-            .map(({ time, left, right }) => ({
-              time,
-              left,
-              right,
-            }))
-            .sort((a, b) => a.time - b.time),
-        };
-
-        console.log("Exported song:", song);
-        alert(`Saved "${name}" (check console)`);
-      });
-
-      clearAllNotesBtn.addEventListener("click", () => {
-        currentSongSequence.length = 0;
-        clearEditor();
-      });
-
-      clearAllNotesBtn.addEventListener("click", () => {
-        clearEditor();
-      });
-
+      setupUI();
       renderNoteSelects();
       clearEditor();
     </script>

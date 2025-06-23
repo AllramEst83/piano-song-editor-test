@@ -1,3 +1,4 @@
+// audio.js
 export async function initAudio() {
   const synth = new Tone.PolySynth(Tone.Synth, {
     oscillator: {

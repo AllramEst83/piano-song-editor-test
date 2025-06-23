@@ -1,162 +1,1138 @@
+// notes-and-keys.js
 export let currentSongSequence = [
-  // Part 1
   {
-    time: 0,
-    right: { note: "E4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 }, // pauseAfter halved
-    left: { note: "C3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+    right: {
+      finger1: {
+        time: 0,
+        note: "E4",
+        type: "quarter",
+        pauseAfter: "eighth",
+      },
+      finger2: {
+        time: 1,
+        note: "E4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger3: {
+        time: 2,
+        note: "F4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger4: {
+        time: 3,
+        note: "G4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger5: null,
+    },
+    left: {
+      finger1: {
+        time: 0,
+        note: "C4",
+        type: "half",
+        pauseAfter: "quarter",
+      },
+      finger2: {
+        time: 2,
+        note: "G3",
+        type: "half",
+        pauseBefore: "eighth",
+        pauseAfter: "quarter",
+      },
+      finger3: null,
+      finger4: null,
+      finger5: null,
+    },
   },
   {
-    time: 0.5, // time halved (was 1)
-    right: { note: "E4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
-    left: { note: "C3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+    right: {
+      finger1: {
+        time: 4,
+        note: "G4",
+        type: "quarter",
+        pauseAfter: "eighth",
+      },
+      finger2: {
+        time: 5,
+        note: "F4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger3: {
+        time: 6,
+        note: "E4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger4: {
+        time: 7,
+        note: "D4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger5: null,
+    },
+    left: {
+      finger1: {
+        time: 4,
+        note: "A3",
+        type: "half",
+        pauseAfter: "quarter",
+      },
+      finger2: {
+        time: 6,
+        note: "E3",
+        type: "half",
+        pauseBefore: "eighth",
+        pauseAfter: "quarter",
+      },
+      finger3: null,
+      finger4: null,
+      finger5: null,
+    },
   },
   {
-    time: 1, // time halved (was 2)
-    right: { note: "F4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
-    left: { note: "C3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+    right: {
+      finger1: {
+        time: 8,
+        note: "C4",
+        type: "quarter",
+        pauseAfter: "eighth",
+      },
+      finger2: {
+        time: 9,
+        note: "C4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger3: {
+        time: 10,
+        note: "D4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger4: {
+        time: 11,
+        note: "E4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger5: null,
+    },
+    left: {
+      finger1: {
+        time: 8,
+        note: "F3",
+        type: "half",
+        pauseAfter: "quarter",
+      },
+      finger2: {
+        time: 10,
+        note: "G3",
+        type: "half",
+        pauseBefore: "eighth",
+        pauseAfter: "quarter",
+      },
+      finger3: null,
+      finger4: null,
+      finger5: null,
+    },
   },
   {
-    time: 1.5, // time halved (was 3)
-    right: { note: "G4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
-    left: { note: "G3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+    right: {
+      finger1: {
+        time: 12,
+        note: "E4",
+        type: "half",
+        pauseAfter: "quarter",
+      },
+      finger2: {
+        time: 14,
+        note: "D4",
+        type: "quarter",
+        pauseBefore: "quarter",
+        pauseAfter: "eighth",
+      },
+      finger3: {
+        time: 15,
+        note: "D4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "quarter",
+      },
+      finger4: null,
+      finger5: null,
+    },
+    left: {
+      finger1: {
+        time: 12,
+        note: "C4",
+        type: "half",
+        pauseAfter: "quarter",
+      },
+      finger2: {
+        time: 14,
+        note: "G3",
+        type: "half",
+        pauseBefore: "quarter",
+        pauseAfter: "quarter",
+      },
+      finger3: null,
+      finger4: null,
+      finger5: null,
+    },
   },
   {
-    time: 2, // time halved (was 4)
-    right: { note: "G4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
-    left: { note: "G3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+    right: {
+      finger1: {
+        time: 16,
+        note: "C4",
+        type: "whole",
+      },
+      finger2: null,
+      finger3: null,
+      finger4: null,
+      finger5: null,
+    },
+    left: {
+      finger1: {
+        time: 16,
+        note: "C3",
+        type: "whole",
+      },
+      finger2: null,
+      finger3: null,
+      finger4: null,
+      finger5: null,
+    },
   },
   {
-    time: 2.5, // time halved (was 5)
-    right: { note: "F4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
-    left: { note: "C3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+    right: {
+      finger1: {
+        time: 0,
+        note: "E4",
+        type: "quarter",
+        pauseAfter: "eighth",
+      },
+      finger2: {
+        time: 1,
+        note: "E4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger3: {
+        time: 2,
+        note: "F4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger4: {
+        time: 3,
+        note: "G4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger5: null,
+    },
+    left: {
+      finger1: {
+        time: 0,
+        note: "C4",
+        type: "half",
+        pauseAfter: "quarter",
+      },
+      finger2: {
+        time: 2,
+        note: "G3",
+        type: "half",
+        pauseBefore: "eighth",
+        pauseAfter: "quarter",
+      },
+      finger3: null,
+      finger4: null,
+      finger5: null,
+    },
   },
   {
-    time: 3, // time halved (was 6)
-    right: { note: "E4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
-    left: { note: "C3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+    right: {
+      finger1: {
+        time: 4,
+        note: "G4",
+        type: "quarter",
+        pauseAfter: "eighth",
+      },
+      finger2: {
+        time: 5,
+        note: "F4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger3: {
+        time: 6,
+        note: "E4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger4: {
+        time: 7,
+        note: "D4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger5: null,
+    },
+    left: {
+      finger1: {
+        time: 4,
+        note: "A3",
+        type: "half",
+        pauseAfter: "quarter",
+      },
+      finger2: {
+        time: 6,
+        note: "E3",
+        type: "half",
+        pauseBefore: "eighth",
+        pauseAfter: "quarter",
+      },
+      finger3: null,
+      finger4: null,
+      finger5: null,
+    },
   },
   {
-    time: 3.5, // time halved (was 7)
-    right: { note: "D4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
-    left: { note: "G3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
-  },
-
-  {
-    time: 4, // time halved (was 8)
-    right: { note: "C4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
-    left: { note: "C3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
-  },
-  {
-    time: 4.5, // time halved (was 9)
-    right: { note: "C4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
-    left: { note: "C3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
-  },
-  {
-    time: 5, // time halved (was 10)
-    right: { note: "D4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
-    left: { note: "C3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
-  },
-  {
-    time: 5.5, // time halved (was 11)
-    right: { note: "E4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
-    left: { note: "G3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
-  },
-  {
-    time: 6, // time halved (was 12)
-    right: { note: "E4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
-    left: { note: "C3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
-  },
-  {
-    time: 6.5, // time halved (was 13)
-    right: { note: "D4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
-    left: { note: "G3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
-  },
-  {
-    time: 7, // time halved (was 14)
-    right: { note: "D4", type: "half", pauseBefore: 0, pauseAfter: 0.15 }, // pauseAfter halved
-    left: { note: "C3", type: "half", pauseBefore: 0, pauseAfter: 0.15 },
-  },
-
-  // Part 2
-  {
-    time: 8, // time halved (was 16)
-    right: { note: "E4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
-    left: { note: "C3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
-  },
-  {
-    time: 8.5, // time halved (was 17)
-    right: { note: "E4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
-    left: { note: "C3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+    right: {
+      finger1: {
+        time: 8,
+        note: "C4",
+        type: "quarter",
+        pauseAfter: "eighth",
+      },
+      finger2: {
+        time: 9,
+        note: "C4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger3: {
+        time: 10,
+        note: "D4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger4: {
+        time: 11,
+        note: "E4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger5: null,
+    },
+    left: {
+      finger1: {
+        time: 8,
+        note: "F3",
+        type: "half",
+        pauseAfter: "quarter",
+      },
+      finger2: {
+        time: 10,
+        note: "G3",
+        type: "half",
+        pauseBefore: "eighth",
+        pauseAfter: "quarter",
+      },
+      finger3: null,
+      finger4: null,
+      finger5: null,
+    },
   },
   {
-    time: 9, // time halved (was 18)
-    right: { note: "F4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
-    left: { note: "C3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+    right: {
+      finger1: {
+        time: 12,
+        note: "E4",
+        type: "half",
+        pauseAfter: "quarter",
+      },
+      finger2: {
+        time: 14,
+        note: "D4",
+        type: "quarter",
+        pauseBefore: "quarter",
+        pauseAfter: "eighth",
+      },
+      finger3: {
+        time: 15,
+        note: "D4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "quarter",
+      },
+      finger4: null,
+      finger5: null,
+    },
+    left: {
+      finger1: {
+        time: 12,
+        note: "C4",
+        type: "half",
+        pauseAfter: "quarter",
+      },
+      finger2: {
+        time: 14,
+        note: "G3",
+        type: "half",
+        pauseBefore: "quarter",
+        pauseAfter: "quarter",
+      },
+      finger3: null,
+      finger4: null,
+      finger5: null,
+    },
   },
   {
-    time: 9.5, // time halved (was 19)
-    right: { note: "E4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
-    left: { note: "G3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+    right: {
+      finger1: {
+        time: 16,
+        note: "C4",
+        type: "whole",
+      },
+      finger2: null,
+      finger3: null,
+      finger4: null,
+      finger5: null,
+    },
+    left: {
+      finger1: {
+        time: 16,
+        note: "C3",
+        type: "whole",
+      },
+      finger2: null,
+      finger3: null,
+      finger4: null,
+      finger5: null,
+    },
   },
   {
-    time: 10, // time halved (was 20)
-    right: { note: "D4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
-    left: { note: "C3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+    right: {
+      finger1: {
+        time: 0,
+        note: "E4",
+        type: "quarter",
+        pauseAfter: "eighth",
+      },
+      finger2: {
+        time: 1,
+        note: "E4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger3: {
+        time: 2,
+        note: "F4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger4: {
+        time: 3,
+        note: "G4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger5: null,
+    },
+    left: {
+      finger1: {
+        time: 0,
+        note: "C4",
+        type: "half",
+        pauseAfter: "quarter",
+      },
+      finger2: {
+        time: 2,
+        note: "G3",
+        type: "half",
+        pauseBefore: "eighth",
+        pauseAfter: "quarter",
+      },
+      finger3: null,
+      finger4: null,
+      finger5: null,
+    },
   },
   {
-    time: 10.5, // time halved (was 21)
-    right: { note: "C4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
-    left: { note: "C3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+    right: {
+      finger1: {
+        time: 4,
+        note: "G4",
+        type: "quarter",
+        pauseAfter: "eighth",
+      },
+      finger2: {
+        time: 5,
+        note: "F4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger3: {
+        time: 6,
+        note: "E4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger4: {
+        time: 7,
+        note: "D4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger5: null,
+    },
+    left: {
+      finger1: {
+        time: 4,
+        note: "A3",
+        type: "half",
+        pauseAfter: "quarter",
+      },
+      finger2: {
+        time: 6,
+        note: "E3",
+        type: "half",
+        pauseBefore: "eighth",
+        pauseAfter: "quarter",
+      },
+      finger3: null,
+      finger4: null,
+      finger5: null,
+    },
   },
   {
-    time: 11, // time halved (was 22)
-    right: { note: "D4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
-    left: { note: "C3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+    right: {
+      finger1: {
+        time: 8,
+        note: "C4",
+        type: "quarter",
+        pauseAfter: "eighth",
+      },
+      finger2: {
+        time: 9,
+        note: "C4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger3: {
+        time: 10,
+        note: "D4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger4: {
+        time: 11,
+        note: "E4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger5: null,
+    },
+    left: {
+      finger1: {
+        time: 8,
+        note: "F3",
+        type: "half",
+        pauseAfter: "quarter",
+      },
+      finger2: {
+        time: 10,
+        note: "G3",
+        type: "half",
+        pauseBefore: "eighth",
+        pauseAfter: "quarter",
+      },
+      finger3: null,
+      finger4: null,
+      finger5: null,
+    },
   },
   {
-    time: 11.5, // time halved (was 23)
-    right: { note: "E4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
-    left: { note: "G3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+    right: {
+      finger1: {
+        time: 12,
+        note: "E4",
+        type: "half",
+        pauseAfter: "quarter",
+      },
+      finger2: {
+        time: 14,
+        note: "D4",
+        type: "quarter",
+        pauseBefore: "quarter",
+        pauseAfter: "eighth",
+      },
+      finger3: {
+        time: 15,
+        note: "D4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "quarter",
+      },
+      finger4: null,
+      finger5: null,
+    },
+    left: {
+      finger1: {
+        time: 12,
+        note: "C4",
+        type: "half",
+        pauseAfter: "quarter",
+      },
+      finger2: {
+        time: 14,
+        note: "G3",
+        type: "half",
+        pauseBefore: "quarter",
+        pauseAfter: "quarter",
+      },
+      finger3: null,
+      finger4: null,
+      finger5: null,
+    },
   },
-
   {
-    time: 12, // time halved (was 24)
-    right: { note: "D4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
-    left: { note: "C3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+    right: {
+      finger1: {
+        time: 16,
+        note: "C4",
+        type: "whole",
+      },
+      finger2: null,
+      finger3: null,
+      finger4: null,
+      finger5: null,
+    },
+    left: {
+      finger1: {
+        time: 16,
+        note: "C3",
+        type: "whole",
+      },
+      finger2: null,
+      finger3: null,
+      finger4: null,
+      finger5: null,
+    },
   },
   {
-    time: 12.5, // time halved (was 25)
-    right: { note: "C4", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
-    left: { note: "G3", type: "quarter", pauseBefore: 0, pauseAfter: 0.05 },
+    right: {
+      finger1: {
+        time: 0,
+        note: "E4",
+        type: "quarter",
+        pauseAfter: "eighth",
+      },
+      finger2: {
+        time: 1,
+        note: "E4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger3: {
+        time: 2,
+        note: "F4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger4: {
+        time: 3,
+        note: "G4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger5: null,
+    },
+    left: {
+      finger1: {
+        time: 0,
+        note: "C4",
+        type: "half",
+        pauseAfter: "quarter",
+      },
+      finger2: {
+        time: 2,
+        note: "G3",
+        type: "half",
+        pauseBefore: "eighth",
+        pauseAfter: "quarter",
+      },
+      finger3: null,
+      finger4: null,
+      finger5: null,
+    },
   },
   {
-    time: 13, // time halved (was 26)
-    right: { note: "C4", type: "half", pauseBefore: 0, pauseAfter: 0.25 }, // pauseAfter halved
-    left: { note: "C3", type: "half", pauseBefore: 0, pauseAfter: 0.25 },
+    right: {
+      finger1: {
+        time: 4,
+        note: "G4",
+        type: "quarter",
+        pauseAfter: "eighth",
+      },
+      finger2: {
+        time: 5,
+        note: "F4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger3: {
+        time: 6,
+        note: "E4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger4: {
+        time: 7,
+        note: "D4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger5: null,
+    },
+    left: {
+      finger1: {
+        time: 4,
+        note: "A3",
+        type: "half",
+        pauseAfter: "quarter",
+      },
+      finger2: {
+        time: 6,
+        note: "E3",
+        type: "half",
+        pauseBefore: "eighth",
+        pauseAfter: "quarter",
+      },
+      finger3: null,
+      finger4: null,
+      finger5: null,
+    },
+  },
+  {
+    right: {
+      finger1: {
+        time: 8,
+        note: "C4",
+        type: "quarter",
+        pauseAfter: "eighth",
+      },
+      finger2: {
+        time: 9,
+        note: "C4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger3: {
+        time: 10,
+        note: "D4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger4: {
+        time: 11,
+        note: "E4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger5: null,
+    },
+    left: {
+      finger1: {
+        time: 8,
+        note: "F3",
+        type: "half",
+        pauseAfter: "quarter",
+      },
+      finger2: {
+        time: 10,
+        note: "G3",
+        type: "half",
+        pauseBefore: "eighth",
+        pauseAfter: "quarter",
+      },
+      finger3: null,
+      finger4: null,
+      finger5: null,
+    },
+  },
+  {
+    right: {
+      finger1: {
+        time: 12,
+        note: "E4",
+        type: "half",
+        pauseAfter: "quarter",
+      },
+      finger2: {
+        time: 14,
+        note: "D4",
+        type: "quarter",
+        pauseBefore: "quarter",
+        pauseAfter: "eighth",
+      },
+      finger3: {
+        time: 15,
+        note: "D4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "quarter",
+      },
+      finger4: null,
+      finger5: null,
+    },
+    left: {
+      finger1: {
+        time: 12,
+        note: "C4",
+        type: "half",
+        pauseAfter: "quarter",
+      },
+      finger2: {
+        time: 14,
+        note: "G3",
+        type: "half",
+        pauseBefore: "quarter",
+        pauseAfter: "quarter",
+      },
+      finger3: null,
+      finger4: null,
+      finger5: null,
+    },
+  },
+  {
+    right: {
+      finger1: {
+        time: 16,
+        note: "C4",
+        type: "whole",
+      },
+      finger2: null,
+      finger3: null,
+      finger4: null,
+      finger5: null,
+    },
+    left: {
+      finger1: {
+        time: 16,
+        note: "C3",
+        type: "whole",
+      },
+      finger2: null,
+      finger3: null,
+      finger4: null,
+      finger5: null,
+    },
+  },
+  {
+    right: {
+      finger1: {
+        time: 0,
+        note: "E4",
+        type: "quarter",
+        pauseAfter: "eighth",
+      },
+      finger2: {
+        time: 1,
+        note: "E4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger3: {
+        time: 2,
+        note: "F4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger4: {
+        time: 3,
+        note: "G4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger5: null,
+    },
+    left: {
+      finger1: {
+        time: 0,
+        note: "C4",
+        type: "half",
+        pauseAfter: "quarter",
+      },
+      finger2: {
+        time: 2,
+        note: "G3",
+        type: "half",
+        pauseBefore: "eighth",
+        pauseAfter: "quarter",
+      },
+      finger3: null,
+      finger4: null,
+      finger5: null,
+    },
+  },
+  {
+    right: {
+      finger1: {
+        time: 4,
+        note: "G4",
+        type: "quarter",
+        pauseAfter: "eighth",
+      },
+      finger2: {
+        time: 5,
+        note: "F4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger3: {
+        time: 6,
+        note: "E4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger4: {
+        time: 7,
+        note: "D4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger5: null,
+    },
+    left: {
+      finger1: {
+        time: 4,
+        note: "A3",
+        type: "half",
+        pauseAfter: "quarter",
+      },
+      finger2: {
+        time: 6,
+        note: "E3",
+        type: "half",
+        pauseBefore: "eighth",
+        pauseAfter: "quarter",
+      },
+      finger3: null,
+      finger4: null,
+      finger5: null,
+    },
+  },
+  {
+    right: {
+      finger1: {
+        time: 8,
+        note: "C4",
+        type: "quarter",
+        pauseAfter: "eighth",
+      },
+      finger2: {
+        time: 9,
+        note: "C4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger3: {
+        time: 10,
+        note: "D4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger4: {
+        time: 11,
+        note: "E4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "eighth",
+      },
+      finger5: null,
+    },
+    left: {
+      finger1: {
+        time: 8,
+        note: "F3",
+        type: "half",
+        pauseAfter: "quarter",
+      },
+      finger2: {
+        time: 10,
+        note: "G3",
+        type: "half",
+        pauseBefore: "eighth",
+        pauseAfter: "quarter",
+      },
+      finger3: null,
+      finger4: null,
+      finger5: null,
+    },
+  },
+  {
+    right: {
+      finger1: {
+        time: 12,
+        note: "E4",
+        type: "half",
+        pauseAfter: "quarter",
+      },
+      finger2: {
+        time: 14,
+        note: "D4",
+        type: "quarter",
+        pauseBefore: "quarter",
+        pauseAfter: "eighth",
+      },
+      finger3: {
+        time: 15,
+        note: "D4",
+        type: "quarter",
+        pauseBefore: "eighth",
+        pauseAfter: "quarter",
+      },
+      finger4: null,
+      finger5: null,
+    },
+    left: {
+      finger1: {
+        time: 12,
+        note: "C4",
+        type: "half",
+        pauseAfter: "quarter",
+      },
+      finger2: {
+        time: 14,
+        note: "G3",
+        type: "half",
+        pauseBefore: "quarter",
+        pauseAfter: "quarter",
+      },
+      finger3: null,
+      finger4: null,
+      finger5: null,
+    },
+  },
+  {
+    right: {
+      finger1: {
+        time: 16,
+        note: "C4",
+        type: "whole",
+      },
+      finger2: null,
+      finger3: null,
+      finger4: null,
+      finger5: null,
+    },
+    left: {
+      finger1: {
+        time: 16,
+        note: "C3",
+        type: "whole",
+      },
+      finger2: null,
+      finger3: null,
+      finger4: null,
+      finger5: null,
+    },
   },
 ];
+
 export const noteDurations = {
-  whole: "1n",
-  half: "2n",
-  quarter: "4n",
-  eighth: "8n",
-  sixteenth: "16n",
-  thirtySecond: "32n",
+  // Extremely short
+  sixtyFourthTriplet: "64t",
   sixtyFourth: "64n",
-  dottedWhole: "1n.",
-  dottedHalf: "2n.",
-  dottedQuarter: "4n.",
-  dottedEighth: "8n.",
-  dottedSixteenth: "16n.",
-  wholeTriplet: "1t",
-  halfTriplet: "2t",
-  quarterTriplet: "4t",
-  eighthTriplet: "8t",
-  sixteenthTriplet: "16t",
+
+  // Very short
   thirtySecondTriplet: "32t",
-  breve: "0.5n",
+  thirtySecond: "32n",
+
+  // Short
+  sixteenthTriplet: "16t",
+  sixteenth: "16n",
+  dottedSixteenth: "16n.",
+
+  // Medium-short
+  eighthTriplet: "8t",
+  eighth: "8n",
+  dottedEighth: "8n.",
+
+  // Common durations
+  quarterTriplet: "4t",
+  quarter: "4n",
+  dottedQuarter: "4n.",
   doubleDottedQuarter: "4n..",
+
+  // Medium-long
+  halfTriplet: "2t",
+  half: "2n",
+  dottedHalf: "2n.",
+
+  // Long
+  wholeTriplet: "1t",
+  whole: "1n",
+  dottedWhole: "1n.",
+
+  // Very long
+  breve: "0.5n", // Double whole note
+  dottedBreve: "0.5n.", // Dotted breve
+  longa: "0.25n", // Quadruple whole note
 };
+
 export const pianoKeys = [
   "C3",
   "C#3",

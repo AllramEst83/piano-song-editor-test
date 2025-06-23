@@ -1,0 +1,166 @@
+/* Custom styles for the song editor, complementing site.css */
+body {
+  display: flex;
+  flex-direction: column; /* Arrange content vertically */
+  justify-content: flex-start; /* Start content from the top */
+  align-items: center;
+  min-height: 100vh;
+  background-color: #1a202c; /* Dark background */
+  padding-top: 2rem; /* Add some padding at the top */
+}
+
+.song-editor-container {
+  width: 95vw;
+  max-width: 1400px;
+  background-color: #333;
+  border-radius: 1rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  padding: 1.5rem;
+  margin-bottom: 2rem; /* Space between editor and piano */
+  box-sizing: border-box;
+}
+
+.note-editor-rack {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px) saturate(180%);
+  -webkit-backdrop-filter: blur(5px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.song-notes-scroll-wrapper {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px) saturate(180%);
+  -webkit-backdrop-filter: blur(5px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: flex; /* Use flex to align title and scrollable area */
+  flex-direction: column; /* Stack title above scrollable area */
+}
+
+.song-notes-rack {
+  height: 80px; /* Fixed height for horizontal scrolling */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  overflow-y: hidden; /* Hide vertical scrollbar */
+  white-space: nowrap; /* Prevent note items from wrapping */
+  display: flex; /* Use flexbox for horizontal layout */
+  align-items: center; /* Center items vertically in the rack */
+  padding-bottom: 1rem; /* Add padding for scrollbar */
+  padding-top: 0.5rem; /* Add padding to the top of the notes */
+}
+
+/* Scrollbar styling for song notes rack */
+.song-notes-rack::-webkit-scrollbar {
+  height: 8px; /* Height for horizontal scrollbar */
+}
+
+.song-notes-rack::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.song-notes-rack::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.05);
+}
+
+.song-notes-rack::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.note-input {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+}
+.note-input:focus {
+  outline: none;
+  border-color: #93c5fd; /* Light blue on focus */
+  box-shadow: 0 0 0 2px rgba(147, 197, 253, 0.5);
+}
+
+.action-button {
+  background-color: #6d28d9; /* Violet-700 */
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+.action-button:hover {
+  background-color: #7c3aed; /* Violet-600 */
+  transform: translateY(-1px);
+}
+.action-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.note-item {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  margin-right: 0.5rem;
+  margin-top: 0.5rem;
+  min-width: 120px;
+  min-height: 60px; /* Ensure vertical space */
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: background-color 0.1s ease-in-out;
+  display: flex;
+  flex-direction: column; /* Stack content vertically */
+  justify-content: center; /* Center vertically */
+  align-items: center; /* Center horizontally */
+  text-align: center;
+}
+
+.note-item:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+.note-item.selected {
+  background-color: #4c1d95; /* Deep violet for selected */
+  border: 1px solid #a78bfa; /* Light violet border */
+}
+.note-input {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.note-input option {
+  background-color: #2d3748;
+  color: white;
+}
+
+.note-item.playing {
+  background-color: rgba(0, 200, 255, 0.2);
+  border: 1px solid rgba(0, 200, 255, 0.6);
+}
+
+#song-notes-list-left-hand,
+#song-notes-list-right-hand {
+  max-height: 50vh;
+  overflow-y: auto;
+  overflow-x: hidden; /* Changed from hidden to auto */
+  flex-wrap: nowrap; /* Added to keep finger columns in a single row */
+}
+
+#song-notes-list-left-hand::-webkit-scrollbar,
+#song-notes-list-right-hand::-webkit-scrollbar {
+  width: 6px;
+}
