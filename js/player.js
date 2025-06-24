@@ -35,23 +35,33 @@ export async function startPlayback() {
         const noteTime = timeBase + pauseBefore;
 
         Tone.Transport.scheduleOnce((t) => {
-          synth.triggerAttackRelease(noteObj.note, duration, t);
+          if (noteObj.note !== null) {
+            // Only play note if it's not a rest
+            synth.triggerAttackRelease(noteObj.note, duration, t);
+          }
 
           const container = document.querySelector(
             `.note-item[data-index="${measureIndex}-${hand}-${finger}"]`
           );
           if (container) {
-            container.classList.add("playing");
+            // Only add 'playing' class if it's an actual note
+            if (noteObj.note !== null) {
+              container.classList.add("playing");
+            }
+
             container.scrollIntoView({
               behavior: "smooth",
               block: "center",
               inline: "nearest",
             });
 
-            setTimeout(
-              () => container.classList.remove("playing"),
-              noteLength * 2000
-            );
+            // Only remove 'playing' class if it was added (i.e., for actual notes)
+            if (noteObj.note !== null) {
+              setTimeout(
+                () => container.classList.remove("playing"),
+                noteLength * 2000
+              );
+            }
           }
         }, noteTime);
       });
