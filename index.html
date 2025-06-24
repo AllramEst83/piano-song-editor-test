@@ -308,10 +308,12 @@
       import { renderNoteSelects, clearEditor } from "./js/editor.js";
       import { setupUI } from "./js/ui.js";
 
-      // EVENT HANDLERS
-      setupUI();
-      renderNoteSelects();
-      clearEditor();
+      window.onload = () => {
+        // EVENT HANDLERS
+        setupUI();
+        renderNoteSelects();
+        clearEditor();
+      };
     </script>
   </body>
 </html>

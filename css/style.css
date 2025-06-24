@@ -111,8 +111,9 @@ body {
   padding: 0.5rem;
   margin-right: 0.5rem;
   margin-top: 0.5rem;
-  min-width: 120px;
-  min-height: 60px; /* Ensure vertical space */
+  /* Changed from min-width and min-height to fixed width and height */
+  width: 120px; /* Fixed width */
+  height: 70px; /* Fixed height, slightly increased to accommodate content better */
   flex-shrink: 0;
   cursor: pointer;
   transition: background-color 0.1s ease-in-out;
@@ -156,8 +157,9 @@ body {
 #song-notes-list-right-hand {
   max-height: 50vh;
   overflow-y: auto;
-  overflow-x: hidden; /* Changed from hidden to auto */
-  flex-wrap: nowrap; /* Added to keep finger columns in a single row */
+  overflow-x: hidden;
+  flex-wrap: nowrap;
+  padding-right: 0.2em;
 }
 
 #song-notes-list-left-hand::-webkit-scrollbar,

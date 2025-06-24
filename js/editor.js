@@ -1,9 +1,6 @@
 // editor.js
-import {
-  currentSongSequence,
-  pianoKeys,
-  noteDurations,
-} from "./notes-and-keys.js";
+import { defaultSongSequence } from "./songs.js";
+import { pianoKeys, noteDurations } from "./music-constants.js";
 import {
   noteInput,
   noteTypeInput,
@@ -17,13 +14,13 @@ import {
 
 export let selectedNoteIndex = -1;
 export let selectedHand = null;
-let selectedFinger = null;
+export let selectedFinger = null;
 export function renderSongNotes() {
   // Clear all finger columns
   Object.values(rightHandSongNotesList).forEach((col) => (col.innerHTML = ""));
   Object.values(leftHandSongNotesList).forEach((col) => (col.innerHTML = ""));
 
-  currentSongSequence.forEach((noteObj, index) => {
+  defaultSongSequence.forEach((noteObj, index) => {
     // Right hand fingers
     if (noteObj.right) {
       Object.entries(noteObj.right).forEach(([fingerKey, note]) => {
@@ -33,12 +30,22 @@ export function renderSongNotes() {
         const el = document.createElement("div");
         el.className = "note-item text-sm text-gray-200";
         el.dataset.index = `${index}-right-${fingerKey}`;
-        el.innerHTML = note
-          ? `<div class="text-center leading-tight">
-              <div>${note.note}</div>
-              <div class="text-xs text-gray-400">${note.type}</div>
-            </div>`
-          : `<div class="text-center text-gray-400">(rest)</div>`;
+        el.innerHTML = `
+          <div class="text-center leading-tight">
+            <div>${
+              note?.note ?? '<span class="text-gray-400">(rest)</span>'
+            }</div>
+            <div class="text-xs text-gray-400">${note.type}</div>
+            ${
+              note?.pauseBefore || note?.pauseAfter
+                ? `<div class="text-[11px] text-gray-400 mt-1 leading-none">
+                    ${note?.pauseBefore ? `B:${note.pauseBefore}` : ""}
+                    ${note?.pauseAfter ? `A:${note.pauseAfter}` : ""}
+                  </div>`
+                : ""
+            }
+          </div>
+        `;
 
         if (
           selectedNoteIndex === index &&
@@ -52,7 +59,9 @@ export function renderSongNotes() {
           selectedNoteIndex = index;
           selectedHand = "right";
           selectedFinger = fingerKey;
-          populateEditor(note.time, note);
+          // Should note at rest also have time?
+          const singleNote = noteObj[selectedHand]?.[fingerKey];
+          populateEditor(singleNote);
           renderSongNotes();
         });
 
@@ -69,12 +78,22 @@ export function renderSongNotes() {
         const el = document.createElement("div");
         el.className = "note-item text-sm text-gray-200";
         el.dataset.index = `${index}-left-${fingerKey}`;
-        el.innerHTML = note
-          ? `<div class="text-center leading-tight">
-              <div>${note.note}</div>
-              <div class="text-xs text-gray-400">${note.type}</div>
-            </div>`
-          : `<div class="text-center text-gray-400">(rest)</div>`;
+        el.innerHTML = `
+          <div class="text-center leading-tight">
+            <div>${
+              note?.note ?? '<span class="text-gray-400">(rest)</span>'
+            }</div>
+            <div class="text-xs text-gray-400">${note.type}</div>
+            ${
+              note?.pauseBefore || note?.pauseAfter
+                ? `<div class="text-[11px] text-gray-400 mt-1 leading-none">
+                    ${note?.pauseBefore ? `B:${note.pauseBefore}` : ""}
+                    ${note?.pauseAfter ? `A:${note.pauseAfter}` : ""}
+                  </div>`
+                : ""
+            }
+          </div>
+        `;
 
         if (
           selectedNoteIndex === index &&
@@ -88,7 +107,8 @@ export function renderSongNotes() {
           selectedNoteIndex = index;
           selectedHand = "left";
           selectedFinger = fingerKey;
-          populateEditor(note.time, note);
+          const singleNote = noteObj[selectedHand]?.[fingerKey];
+          populateEditor(singleNote);
           renderSongNotes();
         });
 
@@ -98,45 +118,35 @@ export function renderSongNotes() {
   });
 }
 
-export function populateEditor(_, noteObj = null) {
-  const block = currentSongSequence[selectedNoteIndex];
-  if (!block) return;
+export function populateEditor(noteObj = null) {
+  timeInput.value = noteObj.time;
 
-  timeInput.value = block.time;
-
-  const isRest = !noteObj;
+  const isRest = !noteObj?.note;
   restToggle.checked = isRest;
-
   noteInput.disabled = isRest;
-  noteTypeInput.disabled = isRest;
-  pauseBeforeInput.disabled = isRest;
-  pauseAfterInput.disabled = isRest;
+
+  noteTypeInput.value =
+    noteDurations[noteObj.type] ||
+    noteObj.type ||
+    noteTypeInput.options[0]?.value;
+  pauseBeforeInput.value = noteDurations[noteObj.pauseBefore] ?? "";
+  pauseAfterInput.value = noteDurations[noteObj.pauseAfter] ?? "";
 
   if (!isRest) {
     noteInput.value = noteObj.note || noteInput.options[0]?.value;
-    noteTypeInput.value =
-      noteDurations[noteObj.type] ||
-      noteObj.type ||
-      noteTypeInput.options[0]?.value;
-    pauseBeforeInput.value = noteDurations[noteObj.pauseBefore] ?? "4n";
-    pauseAfterInput.value = noteDurations[noteObj.pauseAfter] ?? "4n";
-  } else {
-    noteInput.selectedIndex = 0;
-    noteTypeInput.selectedIndex = 0;
-    pauseBeforeInput.value = "4n";
-    pauseAfterInput.value = "4n";
   }
 }
 
 export function clearEditor() {
-  timeInput.value = currentSongSequence.length;
+  timeInput.value = defaultSongSequence.length;
   restToggle.checked = false;
   noteInput.selectedIndex = 0;
   noteTypeInput.selectedIndex = 0;
-  pauseBeforeInput.value = "4n";
-  pauseAfterInput.value = "4n";
+  pauseBeforeInput.value = "";
+  pauseAfterInput.value = "";
   selectedNoteIndex = -1;
   selectedHand = null;
+  selectedFinger = null;
   renderSongNotes();
 }
 
@@ -150,6 +160,8 @@ export function renderNoteSelects() {
   });
 
   noteTypeInput.innerHTML = "";
+  pauseBeforeInput.innerHTML = '<option value="">None</option>';
+  pauseAfterInput.innerHTML = '<option value="">None</option>';
   Object.entries(noteDurations).forEach(([name, value]) => {
     const opt = document.createElement("option");
     opt.value = value;

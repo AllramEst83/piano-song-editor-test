@@ -1,8 +1,13 @@
 // ui.js
-import { noteDurations, currentSongSequence } from "./notes-and-keys.js";
+import { defaultSongSequence } from "./songs.js";
+import { noteDurations } from "./music-constants.js";
 import { isPlaying, startPlayback, stopPlayback } from "./player.js";
-import { clearEditor } from "./editor.js";
-import { selectedNoteIndex, selectedHand } from "./editor.js";
+import {
+  selectedNoteIndex,
+  selectedHand,
+  selectedFinger,
+  clearEditor,
+} from "./editor.js";
 
 export const noteInput = document.getElementById("note-input");
 export const noteTypeInput = document.getElementById("note-type-input");
@@ -62,28 +67,21 @@ export function setupUI() {
     const isRest = restToggle.checked;
 
     noteInput.disabled = isRest;
-    noteTypeInput.disabled = isRest;
-    pauseBeforeInput.disabled = isRest;
-    pauseAfterInput.disabled = isRest;
 
     if (isRest) {
-      // Clear values when rest is selected
       noteInput.selectedIndex = 0;
-      noteTypeInput.selectedIndex = 0;
-      pauseBeforeInput.value = "4n";
-      pauseAfterInput.value = "4n";
     }
   });
   // Add Note
   addNoteBtn.addEventListener("click", () => {
     const time = parseInt(timeInput.value);
 
-    if (currentSongSequence.some((n) => n.time === time)) {
+    if (defaultSongSequence.some((n) => n.time === time)) {
       alert("Time already exists. Select a different time or update.");
       return;
     }
 
-    currentSongSequence.push({
+    defaultSongSequence.push({
       time,
       left: null,
       right: null,
@@ -96,39 +94,57 @@ export function setupUI() {
   deleteNoteBtn.addEventListener("click", () => {
     if (selectedNoteIndex === -1 || !selectedHand) return;
 
-    const noteBlock = currentSongSequence[selectedNoteIndex];
+    const noteBlock = defaultSongSequence[selectedNoteIndex];
     noteBlock[selectedHand] = null;
 
     if (!noteBlock.left && !noteBlock.right) {
-      currentSongSequence.splice(selectedNoteIndex, 1);
+      defaultSongSequence.splice(selectedNoteIndex, 1);
       selectedNoteIndex = -1;
     }
 
     clearEditor();
-    currentSongSequence.sort((a, b) => a.time - b.time);
+    defaultSongSequence.sort((a, b) => a.time - b.time);
   });
 
   updateNoteBtn.addEventListener("click", () => {
-    if (selectedNoteIndex === -1 || !selectedHand) return;
+    if (selectedNoteIndex === -1 || !selectedHand || !selectedFinger) return;
 
     const newTime = parseFloat(timeInput.value);
+
     const noteObj = restToggle.checked
-      ? null
+      ? {
+          note: null,
+          type: noteNameFromValue[noteTypeInput.value] || noteTypeInput.value,
+          pauseBefore: pauseBeforeInput.value
+            ? noteNameFromValue[pauseBeforeInput.value]
+            : null,
+          pauseAfter: pauseAfterInput.value
+            ? noteNameFromValue[pauseAfterInput.value]
+            : null,
+        }
       : {
           note: noteInput.value,
           type: noteNameFromValue[noteTypeInput.value] || noteTypeInput.value,
-          pauseBefore: noteNameFromValue[pauseBeforeInput.value],
-          pauseAfter: noteNameFromValue[pauseAfterInput.value],
+          pauseBefore: pauseBeforeInput.value
+            ? noteNameFromValue[pauseBeforeInput.value]
+            : null,
+          pauseAfter: pauseAfterInput.value
+            ? noteNameFromValue[pauseAfterInput.value]
+            : null,
         };
 
-    const current = currentSongSequence[selectedNoteIndex];
+    const currentBlock = defaultSongSequence[selectedNoteIndex];
+    const currentFingerNote = currentBlock[selectedHand][selectedFinger];
 
-    // If time hasn't changed, just update the note
-    if (newTime === current.time) {
-      current[selectedHand] = noteObj;
+    if (newTime === currentFingerNote.time) {
+      // Update the properties directly
+      currentBlock[selectedHand][selectedFinger] = {
+        time: newTime,
+        ...noteObj,
+      };
     } else {
-      // Check if there's already a block at newTime
-      const conflict = currentSongSequence.find(
+      // Check for time conflict in the main sequence array
+      const conflict = defaultSongSequence.find(
         (n, i) => n.time === newTime && i !== selectedNoteIndex
       );
       if (conflict) {
@@ -136,15 +152,18 @@ export function setupUI() {
         return;
       }
 
-      // Move the note to new time
-      const moved = { ...current };
+      // Move note to new time: update block's time and finger
+      const moved = { ...currentBlock };
       moved.time = newTime;
-      moved[selectedHand] = noteObj;
+      moved[selectedHand] = { ...moved[selectedHand] };
+      moved[selectedHand][selectedFinger] = {
+        ...noteObj,
+        time: newTime,
+      };
 
-      // Remove old block
-      currentSongSequence.splice(selectedNoteIndex, 1);
-      // Insert new block
-      currentSongSequence.push(moved);
+      // Remove old block and insert moved block at the same index
+      defaultSongSequence.splice(selectedNoteIndex, 1);
+      defaultSongSequence.splice(selectedNoteIndex, 0, moved);
     }
 
     clearEditor();
@@ -163,7 +182,7 @@ export function setupUI() {
     const song = {
       name,
       bpm,
-      sequence: currentSongSequence
+      sequence: defaultSongSequence
         .map(({ time, left, right }) => ({
           time,
           left,
@@ -190,7 +209,7 @@ export function setupUI() {
   });
 
   clearAllNotesBtn.addEventListener("click", () => {
-    currentSongSequence.length = 0;
+    defaultSongSequence.length = 0;
     clearEditor();
   });
 
