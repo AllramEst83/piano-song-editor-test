@@ -36,6 +36,8 @@ const noteDefinition = [
         note: "C4",
         // Required: note or rest duration (e.g., "quarter", "half", "eighth", etc.)
         type: "quarter",
+        // Optional: delay before rest (can be null)
+        pauseBefore: null,
         // Optional: delay after note or rest ends (can be null)
         pauseAfter: "eighth",
       },
@@ -46,6 +48,8 @@ const noteDefinition = [
         note: "C4",
         // Required: note or rest duration (e.g., "quarter", "half", "eighth", etc.)
         type: "quarter",
+        // Optional: delay before rest (can be null)
+        pauseBefore: null,
         // Optional: delay after note or rest ends (can be null)
         pauseAfter: "eighth",
       },
@@ -98,6 +102,8 @@ const noteDefinition = [
         note: "C4",
         // Required: note or rest duration (e.g., "quarter", "half", "eighth", etc.)
         type: "quarter",
+        // Optional: delay before rest (can be null)
+        pauseBefore: null,
         // Optional: delay after note or rest ends (can be null)
         pauseAfter: "eighth",
       },
@@ -108,6 +114,8 @@ const noteDefinition = [
         note: "C4",
         // Required: note or rest duration (e.g., "quarter", "half", "eighth", etc.)
         type: "quarter",
+        // Optional: delay before rest (can be null)
+        pauseBefore: null,
         // Optional: delay after note or rest ends (can be null)
         pauseAfter: "eighth",
       },
@@ -153,3 +161,85 @@ const noteDefinition = [
     },
   },
 ];
+
+export function getDefaultNoteDefinition() {
+  // Deep clone to ensure a fresh, independent object is returned each time
+  return JSON.parse(JSON.stringify(defultNoteDefinition));
+}
+
+export const defultNoteDefinition = {
+  left: {
+    finger1: {
+      time: 0,
+      note: null,
+      type: "quarter",
+      pauseBefore: null,
+      pauseAfter: null,
+    },
+    finger2: {
+      time: 0,
+      note: null,
+      type: "quarter",
+      pauseBefore: null,
+      pauseAfter: null,
+    },
+    finger3: {
+      time: 0,
+      note: null,
+      type: "quarter",
+      pauseBefore: null,
+      pauseAfter: null,
+    },
+    finger4: {
+      time: 0,
+      note: null,
+      type: "quarter",
+      pauseBefore: null,
+      pauseAfter: null,
+    },
+    finger5: {
+      time: 0,
+      note: null,
+      type: "quarter",
+      pauseBefore: null,
+      pauseAfter: null,
+    },
+  },
+  right: {
+    finger1: {
+      time: 0,
+      note: null,
+      type: "quarter",
+      pauseBefore: null,
+      pauseAfter: null,
+    },
+    finger2: {
+      time: 0,
+      note: null,
+      type: "quarter",
+      pauseBefore: null,
+      pauseAfter: null,
+    },
+    finger3: {
+      time: 0,
+      note: null,
+      type: "quarter",
+      pauseBefore: null,
+      pauseAfter: null,
+    },
+    finger4: {
+      time: 0,
+      note: null,
+      type: "quarter",
+      pauseBefore: null,
+      pauseAfter: null,
+    },
+    finger5: {
+      time: 0,
+      note: null,
+      type: "quarter",
+      pauseBefore: null,
+      pauseAfter: null,
+    },
+  },
+};

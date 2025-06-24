@@ -83,12 +83,12 @@ body {
 }
 .note-input:focus {
   outline: none;
-  border-color: #93c5fd; /* Light blue on focus */
+  border-color: #93c5fd;
   box-shadow: 0 0 0 2px rgba(147, 197, 253, 0.5);
 }
 
 .action-button {
-  background-color: #6d28d9; /* Violet-700 */
+  background-color: #6d28d9;
   color: white;
   padding: 0.75rem 1.5rem;
   border-radius: 0.75rem;
@@ -97,7 +97,7 @@ body {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 .action-button:hover {
-  background-color: #7c3aed; /* Violet-600 */
+  background-color: #7c3aed;
   transform: translateY(-1px);
 }
 .action-button:active {
@@ -111,16 +111,15 @@ body {
   padding: 0.5rem;
   margin-right: 0.5rem;
   margin-top: 0.5rem;
-  /* Changed from min-width and min-height to fixed width and height */
-  width: 120px; /* Fixed width */
-  height: 70px; /* Fixed height, slightly increased to accommodate content better */
+  width: 120px;
+  height: 70px;
   flex-shrink: 0;
   cursor: pointer;
   transition: background-color 0.1s ease-in-out;
   display: flex;
-  flex-direction: column; /* Stack content vertically */
-  justify-content: center; /* Center vertically */
-  align-items: center; /* Center horizontally */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
 }
 
@@ -128,8 +127,8 @@ body {
   background: rgba(255, 255, 255, 0.15);
 }
 .note-item.selected {
-  background-color: #4c1d95; /* Deep violet for selected */
-  border: 1px solid #a78bfa; /* Light violet border */
+  background-color: #4c1d95;
+  border: 1px solid #a78bfa;
 }
 .note-input {
   background-color: rgba(255, 255, 255, 0.1);
@@ -165,4 +164,37 @@ body {
 #song-notes-list-left-hand::-webkit-scrollbar,
 #song-notes-list-right-hand::-webkit-scrollbar {
   width: 6px;
+}
+
+#song-notes-list-left-hand::-webkit-scrollbar,
+#song-notes-list-right-hand::-webkit-scrollbar {
+  width: 6px;
+}
+
+#song-notes-list-left-hand::-webkit-scrollbar-track,
+#song-notes-list-right-hand::-webkit-scrollbar-track {
+  background: rgba(
+    255,
+    255,
+    255,
+    0.05
+  ); /* A very dark transparent background */
+  border-radius: 10px;
+}
+
+#song-notes-list-left-hand::-webkit-scrollbar-thumb,
+#song-notes-list-right-hand::-webkit-scrollbar-thumb {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.3
+  ); /* A more visible (but still subtle) white transparent color */
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2); /* A slight border to make it stand out more */
+}
+
+#song-notes-list-left-hand::-webkit-scrollbar-thumb:hover,
+#song-notes-list-right-hand::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.5); /* Lighter on hover */
 }

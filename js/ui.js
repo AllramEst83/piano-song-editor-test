@@ -2,12 +2,14 @@
 import { defaultSongSequence } from "./songs.js";
 import { noteDurations } from "./music-constants.js";
 import { isPlaying, startPlayback, stopPlayback } from "./player.js";
+import { getDefaultNoteDefinition } from "./note-definitions.js";
 import {
   selectedNoteIndex,
   selectedHand,
   selectedFinger,
   setSelectedNoteIndex,
   clearEditor,
+  renderSongNotes,
 } from "./editor.js";
 
 export const noteInput = document.getElementById("note-input");
@@ -82,13 +84,10 @@ export function setupUI() {
       return;
     }
 
-    defaultSongSequence.push({
-      time,
-      left: null,
-      right: null,
-    });
+    defaultSongSequence.push(getDefaultNoteDefinition());
 
     clearEditor();
+    renderSongNotes();
   });
 
   // Update Note
