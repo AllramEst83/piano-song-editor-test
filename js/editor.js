@@ -15,6 +15,19 @@ import {
 export let selectedNoteIndex = -1;
 export let selectedHand = null;
 export let selectedFinger = null;
+
+export function setSelectedNoteIndex(index) {
+  selectedNoteIndex = index;
+}
+
+export function setSelectedHand(hand) {
+  selectedHand = hand;
+}
+
+export function setSelectedFinger(finger) {
+  selectedFinger = finger;
+}
+
 export function renderSongNotes() {
   // Clear all finger columns
   Object.values(rightHandSongNotesList).forEach((col) => (col.innerHTML = ""));

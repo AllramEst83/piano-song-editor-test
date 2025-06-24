@@ -6,6 +6,7 @@ import {
   selectedNoteIndex,
   selectedHand,
   selectedFinger,
+  setSelectedNoteIndex,
   clearEditor,
 } from "./editor.js";
 
@@ -94,16 +95,39 @@ export function setupUI() {
   deleteNoteBtn.addEventListener("click", () => {
     if (selectedNoteIndex === -1 || !selectedHand) return;
 
-    const noteBlock = defaultSongSequence[selectedNoteIndex];
-    noteBlock[selectedHand] = null;
+    const currentNoteBlock = defaultSongSequence[selectedNoteIndex];
 
-    if (!noteBlock.left && !noteBlock.right) {
-      defaultSongSequence.splice(selectedNoteIndex, 1);
-      selectedNoteIndex = -1;
+    // Ensure the selected hand and finger exist before trying to modify
+    if (
+      currentNoteBlock[selectedHand] &&
+      currentNoteBlock[selectedHand][selectedFinger]
+    ) {
+      currentNoteBlock[selectedHand][selectedFinger].note = null; // Set the specific note to null (rest)
     }
 
-    clearEditor();
-    defaultSongSequence.sort((a, b) => a.time - b.time);
+    // Function to check if a hand has any active notes
+    const hasActiveNotes = (handObj) => {
+      if (!handObj) return false;
+      // Check if any finger within the hand has a non-null note
+      return Object.values(handObj).some(
+        (fingerNote) => fingerNote && fingerNote.note !== null
+      );
+    };
+
+    // After setting the note to null, check the selected hand specifically
+    if (!hasActiveNotes(currentNoteBlock[selectedHand])) {
+      // If the selected hand is now completely empty, remove its entry from the note block
+      delete currentNoteBlock[selectedHand]; // This makes currentNoteBlock.left or currentNoteBlock.right undefined
+    }
+
+    // Now, check if the ENTIRE time block is empty (both hands are gone or have no active notes)
+    if (!currentNoteBlock.left && !currentNoteBlock.right) {
+      defaultSongSequence.splice(selectedNoteIndex, 1);
+      setSelectedNoteIndex(-1); // Reset selected index as the block is removed
+    }
+
+    clearEditor(); // This will re-render notes and reset the editor inputs
+    defaultSongSequence.sort((a, b) => a.time - b.time); // Ensure correct order
   });
 
   updateNoteBtn.addEventListener("click", () => {
