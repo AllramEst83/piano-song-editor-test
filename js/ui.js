@@ -1,5 +1,5 @@
 // ui.js
-import { defaultSongSequence } from "./songs.js";
+import { songSequence } from "./songs.js";
 import { noteDurations } from "./music-constants.js";
 import { isPlaying, startPlayback, stopPlayback } from "./player.js";
 import { getDefaultNoteDefinition } from "./note-definitions.js";
@@ -77,14 +77,21 @@ export function setupUI() {
   });
   // Add Note
   addNoteBtn.addEventListener("click", () => {
-    const time = parseInt(timeInput.value);
+    const time = parseInt(timeInput.value, 10);
 
-    if (defaultSongSequence.some((n) => n.time === time)) {
+    // Check if time already exists
+    const timeExists = songSequence.some(
+      (note) =>
+        Object.values(note.left || {}).some((f) => f.time === time) ||
+        Object.values(note.right || {}).some((f) => f.time === time)
+    );
+
+    if (timeExists) {
       alert("Time already exists. Select a different time or update.");
       return;
     }
 
-    defaultSongSequence.push(getDefaultNoteDefinition());
+    songSequence.push(getDefaultNoteDefinition(time));
 
     clearEditor();
     renderSongNotes();
@@ -92,9 +99,12 @@ export function setupUI() {
 
   // Update Note
   deleteNoteBtn.addEventListener("click", () => {
-    if (selectedNoteIndex === -1 || !selectedHand) return;
+    if (selectedNoteIndex === -1 || !selectedHand) {
+      alert("Please select a note to delete.");
+      return;
+    }
 
-    const currentNoteBlock = defaultSongSequence[selectedNoteIndex];
+    const currentNoteBlock = songSequence[selectedNoteIndex];
 
     // Ensure the selected hand and finger exist before trying to modify
     if (
@@ -121,16 +131,19 @@ export function setupUI() {
 
     // Now, check if the ENTIRE time block is empty (both hands are gone or have no active notes)
     if (!currentNoteBlock.left && !currentNoteBlock.right) {
-      defaultSongSequence.splice(selectedNoteIndex, 1);
+      songSequence.splice(selectedNoteIndex, 1);
       setSelectedNoteIndex(-1); // Reset selected index as the block is removed
     }
 
     clearEditor(); // This will re-render notes and reset the editor inputs
-    defaultSongSequence.sort((a, b) => a.time - b.time); // Ensure correct order
+    songSequence.sort((a, b) => a.time - b.time); // Ensure correct order
   });
 
   updateNoteBtn.addEventListener("click", () => {
-    if (selectedNoteIndex === -1 || !selectedHand || !selectedFinger) return;
+    if (selectedNoteIndex === -1 || !selectedHand || !selectedFinger) {
+      alert("Please select a note to update.");
+      return;
+    }
 
     const newTime = parseFloat(timeInput.value);
 
@@ -156,7 +169,7 @@ export function setupUI() {
             : null,
         };
 
-    const currentBlock = defaultSongSequence[selectedNoteIndex];
+    const currentBlock = songSequence[selectedNoteIndex];
     const currentFingerNote = currentBlock[selectedHand][selectedFinger];
 
     if (newTime === currentFingerNote.time) {
@@ -167,7 +180,7 @@ export function setupUI() {
       };
     } else {
       // Check for time conflict in the main sequence array
-      const conflict = defaultSongSequence.find(
+      const conflict = songSequence.find(
         (n, i) => n.time === newTime && i !== selectedNoteIndex
       );
       if (conflict) {
@@ -185,8 +198,8 @@ export function setupUI() {
       };
 
       // Remove old block and insert moved block at the same index
-      defaultSongSequence.splice(selectedNoteIndex, 1);
-      defaultSongSequence.splice(selectedNoteIndex, 0, moved);
+      songSequence.splice(selectedNoteIndex, 1);
+      songSequence.splice(selectedNoteIndex, 0, moved);
     }
 
     clearEditor();
@@ -205,13 +218,7 @@ export function setupUI() {
     const song = {
       name,
       bpm,
-      sequence: defaultSongSequence
-        .map(({ time, left, right }) => ({
-          time,
-          left,
-          right,
-        }))
-        .sort((a, b) => a.time - b.time),
+      sequence: songSequence,
     };
 
     // Convert to JSON string
@@ -232,7 +239,7 @@ export function setupUI() {
   });
 
   clearAllNotesBtn.addEventListener("click", () => {
-    defaultSongSequence.length = 0;
+    songSequence.length = 0;
     clearEditor();
   });
 

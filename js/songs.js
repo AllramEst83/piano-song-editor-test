@@ -1,4 +1,4 @@
-export let defaultSongSequence = [
+export let songSequence = [
   // Verse 1: Twinkle, twinkle, little star
   {
     right: {

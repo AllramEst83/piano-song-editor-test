@@ -1,5 +1,5 @@
 // editor.js
-import { defaultSongSequence } from "./songs.js";
+import { songSequence } from "./songs.js";
 import { pianoKeys, noteDurations } from "./music-constants.js";
 import {
   noteInput,
@@ -33,7 +33,7 @@ export function renderSongNotes() {
   Object.values(rightHandSongNotesList).forEach((col) => (col.innerHTML = ""));
   Object.values(leftHandSongNotesList).forEach((col) => (col.innerHTML = ""));
 
-  defaultSongSequence.forEach((noteObj, index) => {
+  songSequence.forEach((noteObj, index) => {
     // Right hand fingers
     if (noteObj.right) {
       Object.entries(noteObj.right).forEach(([fingerKey, note]) => {
@@ -151,7 +151,7 @@ export function populateEditor(noteObj = null) {
 }
 
 export function clearEditor() {
-  timeInput.value = defaultSongSequence.length;
+  timeInput.value = songSequence.length;
   restToggle.checked = false;
   noteInput.selectedIndex = 0;
   noteTypeInput.selectedIndex = 0;

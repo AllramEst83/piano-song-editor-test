@@ -1,13 +1,13 @@
 // player.js
 import { initAudio } from "./audio.js";
-import { defaultSongSequence } from "./songs.js";
+import { songSequence } from "./songs.js";
 import { noteDurations } from "./music-constants.js";
 import { bpmSlider, playBtn } from "./ui.js";
 
 export let isPlaying = false;
 
 export async function startPlayback() {
-  if (defaultSongSequence.length === 0) {
+  if (songSequence.length === 0) {
     alert("No notes to play. Please add some notes first.");
     return;
   }
@@ -19,7 +19,7 @@ export async function startPlayback() {
 
   const fingers = ["finger1", "finger2", "finger3", "finger4", "finger5"];
 
-  defaultSongSequence.forEach((measure, measureIndex) => {
+  songSequence.forEach((measure, measureIndex) => {
     ["right", "left"].forEach((hand) => {
       fingers.forEach((finger) => {
         const noteObj = measure[hand]?.[finger];
@@ -71,7 +71,7 @@ export async function startPlayback() {
   // Calculate when to stop
   let latestEndTime = 0;
 
-  defaultSongSequence.forEach((measure) => {
+  songSequence.forEach((measure) => {
     ["right", "left"].forEach((hand) => {
       fingers.forEach((finger) => {
         const note = measure[hand]?.[finger];
@@ -108,18 +108,4 @@ export function stopPlayback() {
   Tone.Transport.cancel();
   isPlaying = false;
   playBtn.textContent = "▶️ Play Song";
-}
-
-function getEndTime(note) {
-  if (!note) return 0;
-  const duration = noteDurations[note.type] || "4n";
-  const durSec = Tone.Time(duration).toSeconds();
-
-  const noteTypeBefore = noteDurations[note.pauseBefore] || "4n";
-  const noteTypeAfter = noteDurations[note.pauseAfter] || "4n";
-
-  const after = Tone.Time(noteTypeAfter).toSeconds();
-  const before = Tone.Time(noteTypeBefore).toSeconds();
-
-  return durSec + after + before;
 }

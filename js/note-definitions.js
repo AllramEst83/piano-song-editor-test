@@ -162,12 +162,19 @@ const noteDefinition = [
   },
 ];
 
-export function getDefaultNoteDefinition() {
-  // Deep clone to ensure a fresh, independent object is returned each time
-  return JSON.parse(JSON.stringify(defultNoteDefinition));
+export function getDefaultNoteDefinition(time = 0) {
+  const clone = JSON.parse(JSON.stringify(defaultNoteDefinition));
+
+  for (const hand of ["left", "right"]) {
+    for (const finger in clone[hand]) {
+      clone[hand][finger].time = time;
+    }
+  }
+
+  return clone;
 }
 
-export const defultNoteDefinition = {
+export const defaultNoteDefinition = {
   left: {
     finger1: {
       time: 0,
